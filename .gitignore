@@ -3,10 +3,7 @@
 Debug/*
 PenroseTilling/Debug/*
 PenroseTilling/x64/*
-*.vcxproj
-*.vcxproj.filters
-*.vcxproj.user
-*.sln
+
 
 # Prerequisites
 *.d

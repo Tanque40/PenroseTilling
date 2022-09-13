@@ -113,3 +113,37 @@ int Shader::GetUniformLocation( const std::string &name ){
 	m_UniformLocationCache[ name ] = location;
 	return location;
 }
+
+void Shader::Setuniforms1i( const std::string &name, int value ){
+	GLCall( glUniform1i( GetUniformLocation( name ), value ) );
+}
+
+void Shader::Setuniforms1iv( const std::string &name, int value, int *values ){
+	GLCall( glUniform1iv( GetUniformLocation( name ), value, values ) );
+}
+
+void Shader::SetUniformFloat( const std::string &name, float value ){
+	GLCall( glUniform1f( GetUniformLocation( name ), value ) );
+}
+
+void Shader::Setuniforms4f( const std::string &name, float v0, float v1, float v2, float v3 ){
+	GLCall( glUniform4f( GetUniformLocation( name ), v0, v1, v2, v3 ) );
+}
+
+void Shader::SetuniformsVec3( const std::string &name, glm::vec3 value ){
+	GLCall( glUniform3fv( GetUniformLocation( name ), 1, &value[ 0 ] ) );
+}
+
+void Shader::SetUniformsMat4( const std::string &name, glm::mat4 uniform_1, int transpose ){
+	
+	if( transpose ){
+		GLCall( glUniformMatrix4fv( GetUniformLocation( name ), 1, GL_TRUE, glm::value_ptr( uniform_1 ) ) );
+	} else{
+		GLCall( glUniformMatrix4fv( GetUniformLocation( name ), 1, GL_FALSE, glm::value_ptr( uniform_1 ) ) );
+	}
+
+}
+
+void Shader::SetuniformsMat4f( const std::string &name, const glm::mat4 &mat4 ){
+	GLCall( glUniformMatrix4fv( GetUniformLocation( name ), 1, GL_FALSE, &mat4[ 0 ][ 0 ] ) );
+}

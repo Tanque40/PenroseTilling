@@ -306,15 +306,15 @@ int main( void ){
             {
 
                 ImGui::Text( "Project 2" );
-                ImGui::TextWrapped( "\n Camera can moves with AWSD keys. \n" );
-                ImGui::TextWrapped( "\n Change camera tu cursor with Q key. \n" );
-                ImGui::TextWrapped( "\n Presione E para volver a mover la camara \n" );
-                ImGui::TextWrapped( "\nPresiona I para la visualizacon de wireframe\n" );
-                ImGui::TextWrapped( "\nPresiona O para la visualizacion con relleno\n" );
-                ImGui::TextWrapped( "\nPresiona P para la visualizacion de los puntos que conforman\n" );
-                ImGui::TextWrapped( "\nSi se desplaza a la parte de atras de la teslacion prodra ver como se ve el efecto de la luz atraves de las texturas ya que estas son png con un poco de transparencia que nos permite ver el efecto traslucido de las mismas\n" );
-                ImGui::TextWrapped( "\nEn este menu se pueden controlar algunos aspectos generales del proyecto como el uso de proyeccion y modelo.\n" );
-                ImGui::TextWrapped( "\nAl igual que manejaremos la direcciones de la luz y la ubicacion de la misma.\n" );
+                ImGui::TextWrapped( "\nCamera can moves with AWSD keys. \n" );
+                ImGui::TextWrapped( "Scroll to do zoom\n" );
+                ImGui::TextWrapped( "Change camera tu cursor with Q key. \n" );
+                ImGui::TextWrapped( "Press E to move camera again  \n" );
+                ImGui::TextWrapped( "Press I to wireframe visualization mode\n" );
+                ImGui::TextWrapped( "Press O to fill visualization mode\n" );
+                ImGui::TextWrapped( "Press P to dots visialization\n" );
+                
+                ImGui::TextWrapped( "\nOn cursor mode we can modificate animation propiertes on the UI down here\n" );
 
                 if( ImGui::CollapsingHeader( "Iluminacion" ) ){
 

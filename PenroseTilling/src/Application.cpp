@@ -33,8 +33,8 @@ void scroll_callback( GLFWwindow *window, double xoffset, double yoffset );
 void processInput( GLFWwindow *window );
 
 // settings
-unsigned int SCR_WIDTH = 1080;
-unsigned int SCR_HEIGHT = 810;
+unsigned int SCR_WIDTH = 1920;
+unsigned int SCR_HEIGHT = 1080;
 
 // Tilling Settings
 const float TILLING_DIAMETER = 1.0f;
@@ -63,7 +63,7 @@ int main( void ){
 
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow( SCR_WIDTH, SCR_HEIGHT, "Proyecto_2", NULL, NULL );
+    window = glfwCreateWindow( SCR_WIDTH, SCR_HEIGHT, "Penrose Tilling", NULL, NULL );
     if( !window ){
         glfwTerminate();
         return -1;
@@ -89,7 +89,7 @@ int main( void ){
 
     {
 
-        Penrose p( PARTITIONS, Coordinate( 0.0, 0.0 ), 9, TILLING_DIAMETER );
+        Penrose p( PARTITIONS, Coordinate( 0.0, 0.0 ), 36, TILLING_DIAMETER );
 
         p.execute();
         p.DoIt3D();
@@ -221,28 +221,25 @@ int main( void ){
                 if( stop_animation ){
                     time = 0;
                 } else{
-
                     time = glfwGetTime();
-
                 }
-                if( magnitude > 0 ){
 
+                if( magnitude > 0 ){
                     shader.SetUniformFloat( "time", 3.14159265359 );
                     shader.SetUniformFloat( "magnitude", magnitude );
-
                     magnitude -= 0.015;
-
                 } else{
-
                     shader.SetUniformFloat( "magnitude", 1 * explotion_scale );
                     shader.SetUniformFloat( "time", time );
                 }
+
                 /*
                  * Here we set all the uniforms for the 5/6 types of lights we have. We have to set them manually and index
                  * the proper PointLight struct in the array to set each uniform variable. This can be done more code-friendly
                  * by defining light types as classes and set their values in there, or by using a more efficient uniform approach
                  * by using 'Uniform buffer objects', but that is something we'll discuss in the 'Advanced GLSL' tutorial.
                  */
+
                  // directional light
                 shader.SetuniformsVec3( "dirLight.direction", lightPosition );
                 shader.SetuniformsVec3( "dirLight.ambient", glm::vec3( 0.05f, 0.05f, 0.05f ) );
@@ -316,62 +313,62 @@ int main( void ){
                 
                 ImGui::TextWrapped( "\nOn cursor mode we can modificate animation propiertes on the UI down here\n" );
 
-                if( ImGui::CollapsingHeader( "Iluminacion" ) ){
+                if( ImGui::CollapsingHeader( "Lights" ) ){
 
-                    if( ImGui::TreeNode( "Luz direccional" ) ){
+                    if( ImGui::TreeNode( "Directional Light" ) ){
                         // mover posición
-                        ImGui::SliderFloat3( "move_luz_direccional", &lightPosition.x, -10.0f, 10.0f );
+                        ImGui::SliderFloat3( "Move directional light", &lightPosition.x, -10.0f, 10.0f );
                         ImGui::TreePop();
                     }
 
-                    if( ImGui::TreeNode( "Punto de luz 1" ) ){
+                    if( ImGui::TreeNode( "Light point 1" ) ){
                         // mover posición
-                        ImGui::SliderFloat3( "move_punto_luz_1", &pointLightPositions[ 0 ].x, -10.0f, 10.0f );
+                        ImGui::SliderFloat3( "Move light point 1", &pointLightPositions[ 0 ].x, -10.0f, 10.0f );
                         ImGui::TreePop();
                     }
 
-                    if( ImGui::TreeNode( "Punto de luz 2" ) ){
+                    if( ImGui::TreeNode( "Light point 2" ) ){
                         // mover posición
-                        ImGui::SliderFloat3( "move_punto_luz_2", &pointLightPositions[ 1 ].x, -10.0f, 10.0f );
+                        ImGui::SliderFloat3( "Move light point 1", &pointLightPositions[ 1 ].x, -10.0f, 10.0f );
                         ImGui::TreePop();
                     }
 
-                    if( ImGui::TreeNode( "Punto de luz 3" ) ){
+                    if( ImGui::TreeNode( "Light point 3" ) ){
                         // mover posición
-                        ImGui::SliderFloat3( "move_punto_luz_3", &pointLightPositions[ 2 ].x, -10.0f, 10.0f );
+                        ImGui::SliderFloat3( "Move light point 3", &pointLightPositions[ 2 ].x, -10.0f, 10.0f );
                         ImGui::TreePop();
                     }
 
-                    if( ImGui::TreeNode( "Punto de luz 4" ) ){
+                    if( ImGui::TreeNode( "Light point 4" ) ){
                         // mover posición
-                        ImGui::SliderFloat3( "move_punto_luz_4", &pointLightPositions[ 3 ].x, -10.0f, 10.0f );
+                        ImGui::SliderFloat3( "Move light point 4", &pointLightPositions[ 3 ].x, -10.0f, 10.0f );
                         ImGui::TreePop();
                     }
 
                 }
 
-                if( ImGui::CollapsingHeader( "Modelo" ) ){
+                if( ImGui::CollapsingHeader( "Model" ) ){
                     // translate
-                    ImGui::SliderFloat3( "Vector de Transacion: ", &translate_Vector.x, -10.0f, 10.0f );
+                    ImGui::SliderFloat3( "Translate vector: ", &translate_Vector.x, -10.0f, 10.0f );
 
                     //rotate
-                    ImGui::SliderAngle( "Angulo de rotacion", &rotate_angle );
-                    ImGui::SliderFloat3( "Vector de Rotacion", &rotate_Vector.x, 0.0f, 1.0f );
+                    ImGui::SliderAngle( "Rotate Angle", &rotate_angle );
+                    ImGui::SliderFloat3( "Rotate Vector", &rotate_Vector.x, 0.0f, 1.0f );
 
                     //scale
-                    ImGui::SliderFloat3( "Escalado", &scale_Vector.x, -10.0f, 10.0f );
+                    ImGui::SliderFloat3( "Scale", &scale_Vector.x, -10.0f, 10.0f );
                 }
 
-                if( ImGui::CollapsingHeader( "Proyeccion" ) ){
+                if( ImGui::CollapsingHeader( "Projection" ) ){
                     ImGui::SliderFloat( "near", &near, -10.0f, 25.0f );
                     ImGui::SliderFloat( "far", &far, 30.0f, -150.0f );
-                    ImGui::SliderFloat( "angulo o zoom", &camera.Zoom, 0.0, 50.0 );
+                    ImGui::SliderFloat( "angle or zoom", &camera.Zoom, 0.0, 50.0 );
                 }
 
-                if( ImGui::CollapsingHeader( "Animacion" ) ){
-                    ImGui::Checkbox( "Detener animacion", &stop_animation );
-                    ImGui::TextWrapped( "Aumentar el tamaño de la explocion en: " );
-                    ImGui::InputFloat( "Escala:", &explotion_scale );
+                if( ImGui::CollapsingHeader( "Animation" ) ){
+                    ImGui::Checkbox( "Stop Animation", &stop_animation );
+                    ImGui::TextWrapped( "Increase size of explotion." );
+                    ImGui::InputFloat( "Scale:", &explotion_scale );
                 }
 
                 ImGui::Text( "Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate );

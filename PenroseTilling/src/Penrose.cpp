@@ -53,9 +53,15 @@ std::vector<Triangle> Penrose::deflate(){
 		if( t.type == 2 ){
 
 			// B + ( ( A - B) / PHI )
-			Coordinate Q = Coordinate::sum( t.b, Coordinate::divide( Coordinate::diff( t.a, t.b ), PHI ) );
+			Coordinate Q = Coordinate::sum(
+				t.b, 
+				Coordinate::divide(	Coordinate::diff( t.a, t.b ), PHI ) 
+			);
 			// B + ( ( C - B) / PHI )
-			Coordinate R = Coordinate::sum( t.b, Coordinate::divide( Coordinate::diff( t.c, t.b ), PHI ) );
+			Coordinate R = Coordinate::sum( 
+				t.b, 
+				Coordinate::divide( Coordinate::diff( t.c, t.b ), PHI )
+			);
 
 			temp.push_back( Triangle( R, t.c, t.a, 1 ) );
 			temp.push_back( Triangle( Q, R, t.b, 1 ) );
@@ -63,7 +69,10 @@ std::vector<Triangle> Penrose::deflate(){
 
 		} else if( t.type == 1 ){
 
-			Coordinate P = Coordinate::sum( t.a, Coordinate::divide( Coordinate::diff( t.b, t.a ), PHI ) );
+			Coordinate P = Coordinate::sum(
+				t.a,
+				Coordinate::divide( Coordinate::diff( t.b, t.a ), PHI )
+			);
 
 			temp.push_back( Triangle( t.c, P, t.b, 0 ) );
 			temp.push_back( Triangle( P, t.c, t.a, 1 ) );
